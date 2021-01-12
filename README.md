@@ -1,12 +1,12 @@
 # テーブル設計
 
-## users　テーブル
+## users テーブル
 
 |column            |Type   |Options                  |
 |------------------|-------|-------------------------|
 |nickname          |string |null: false              |
-|email             |string |null: false              |
-|encrypted_password|string |null: false, unique: true|
+|email             |string |null: false, unique: true|
+|encrypted_password|string |null: false              |
 |first_name        |string |null: false              |
 |last_name         |string |null: false              |
 |read_first_name   |string |null: false              |
@@ -23,6 +23,7 @@
 |column        |Type         |Options                     |
 |--------------|-------------|----------------------------|
 |title         |string       |null: false                 |
+|explanation   |text         |null: false                 |
 |price         |integer      |null: false                 |
 |category_id   |integer      |null: false, ActiveHashで実装|
 |item_status_id|integer      |null: false, ActiveHashで実装|
