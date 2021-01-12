@@ -1,24 +1,64 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+|column            |Type   |Options                  |
+|------------------|-------|-------------------------|
+|nickname          |string |null: false              |
+|email             |string |null: false, unique: true|
+|encrypted_password|string |null: false              |
+|first_name        |string |null: false              |
+|last_name         |string |null: false              |
+|read_first_name   |string |null: false              |
+|read_last_name    |string |null: false              |
+|date              |date   |null: false              |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :orders
 
-* Configuration
+## items テーブル
 
-* Database creation
+|column        |Type         |Options                     |
+|--------------|-------------|----------------------------|
+|title         |string       |null: false                 |
+|explanation   |text         |null: false                 |
+|price         |integer      |null: false                 |
+|category_id   |integer      |null: false, ActiveHashで実装|
+|item_status_id|integer      |null: false, ActiveHashで実装|
+|burden_id     |integer      |null: false, ActiveHashで実装|
+|prefecture_id |integer      |null: false, ActiveHashで実装|
+|day_id        |integer      |null: false, ActiveHashで実装|
+|user          |references   |foreign_key: true           |
 
-* Database initialization
+### Association
+- belongs_to :user
+- has_one :order
 
-* How to run the test suite
+## orders テーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+|column      |Type      |Options          |
+|------------|----------|-----------------|
+|user        |references|foreign_key: true|
+|item        |references|foreign_key: true|
 
-* Deployment instructions
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one :residence
 
-* ...
+## residences テーブル
+
+|column       |Type      |Options                     |
+|-------------|----------|----------------------------|
+|postal_code  |string    |null: false                 |
+|prefecture_id|integer   |null: false, ActiveHashで実装|
+|municipality |string    |null: false                 |
+|address      |string    |null: false                 |
+|building_name|string    |                            |
+|phone_number |string    |null: false                 |
+|order        |references|foreign_key: true           |
+
+### Association
+- belongs_to :order
