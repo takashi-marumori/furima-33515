@@ -1,24 +1,62 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users　テーブル
 
-Things you may want to cover:
+|column    |Type   |Options                  |
+|----------|-------|-------------------------|
+|nickname  |string |null: false              |
+|email     |string |null: false              |
+|password  |string |null: false, unique: true|
+|first_name|string |null: false              |
+|last_name |string |null: false              |
+|birthday  |integer|null: false              |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_mane :orders
 
-* Configuration
+## items テーブル
 
-* Database creation
+|column     |Type         |Options          |
+|-----------|-------------|-----------------|
+|title      |string       |null: false      |
+|price      |integer      |null: false      |
+|category   |text         |null: false      |
+|item_status|text         |null: false      |
+|burden     |text         |null: false      |
+|area       |text         |null: false      |
+|days       |text         |null: false      |
+|image      |ActiveStorage|null: false      |
+|user_id    |references   |foreign_key: true|
 
-* Database initialization
+### Association
+- belongs_to: user
+- has_one   : order
 
-* How to run the test suite
+## orders テーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+|column      |Type      |Options          |
+|------------|----------|-----------------|
+|user_id     |references|foreign_key: true|
+|item_id     |references|foreign_key: true|
 
-* Deployment instructions
+### Association
+- belongs_to: user
+- belongs_to: item
+- has_one   : residence
 
-* ...
+## residences テーブル
+
+|column       |Type      |Options          |
+|-------------|----------|-----------------|
+|postal_code  |integer   |null: false      |
+|prefectures  |string    |null: false      |
+|municipality |string    |null: false      |
+|address      |string    |null: false      |
+|building_name|string    |                 |
+|phone_number |integer   |null: false      |
+|order_id     |references|foreign_key: true|
+
+### Association
+- belongs_to: order
