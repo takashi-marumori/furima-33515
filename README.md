@@ -11,7 +11,7 @@
 |last_name         |string |null: false              |
 |read_first_name   |string |null: false              |
 |read_last_name    |string |null: false              |
-|date              |integer|null: false              |
+|date              |date   |null: false              |
 
 ### Association
 
@@ -24,40 +24,40 @@
 |--------------|-------------|----------------------------|
 |title         |string       |null: false                 |
 |price         |integer      |null: false                 |
-|category      |integer      |null: false, ActiveHashで実装|
-|item_status   |integer      |null: false, ActiveHashで実装|
-|burden        |integer      |null: false, ActiveHashで実装|
-|prefectures   |integer      |null: false, ActiveHashで実装|
-|days          |integer      |null: false, ActiveHashで実装|
-|user_id       |references   |foreign_key: true           |
+|category_id   |integer      |null: false, ActiveHashで実装|
+|item_status_id|integer      |null: false, ActiveHashで実装|
+|burden_id     |integer      |null: false, ActiveHashで実装|
+|prefecture_id |integer      |null: false, ActiveHashで実装|
+|day_id        |integer      |null: false, ActiveHashで実装|
+|user          |references   |foreign_key: true           |
 
 ### Association
-- belongs_to: user
-- has_one   : order
+- belongs_to :user
+- has_one :order
 
 ## orders テーブル
 
 |column      |Type      |Options          |
 |------------|----------|-----------------|
-|user_id     |references|foreign_key: true|
-|item_id     |references|foreign_key: true|
+|user        |references|foreign_key: true|
+|item        |references|foreign_key: true|
 
 ### Association
-- belongs_to: user
-- belongs_to: item
-- has_one   : residence
+- belongs_to :user
+- belongs_to :item
+- has_one :residence
 
 ## residences テーブル
 
 |column       |Type      |Options                     |
 |-------------|----------|----------------------------|
 |postal_code  |string    |null: false                 |
-|prefectures  |string    |null: false, ActiveHashで実装|
+|prefecture_id|integer   |null: false, ActiveHashで実装|
 |municipality |string    |null: false                 |
 |address      |string    |null: false                 |
 |building_name|string    |                            |
-|phone_number |integer   |null: false                 |
-|order_id     |references|foreign_key: true           |
+|phone_number |string    |null: false                 |
+|order        |references|foreign_key: true           |
 
 ### Association
-- belongs_to: order
+- belongs_to :order
