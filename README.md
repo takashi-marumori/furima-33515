@@ -2,33 +2,34 @@
 
 ## users　テーブル
 
-|column    |Type   |Options                  |
-|----------|-------|-------------------------|
-|nickname  |string |null: false              |
-|email     |string |null: false              |
-|password  |string |null: false, unique: true|
-|first_name|string |null: false              |
-|last_name |string |null: false              |
-|birthday  |integer|null: false              |
+|column            |Type   |Options                  |
+|------------------|-------|-------------------------|
+|nickname          |string |null: false              |
+|email             |string |null: false              |
+|encrypted_password|string |null: false, unique: true|
+|first_name        |string |null: false              |
+|last_name         |string |null: false              |
+|read_first_name   |string |null: false              |
+|read_last_name    |string |null: false              |
+|date              |integer|null: false              |
 
 ### Association
 
 - has_many :items
-- has_mane :orders
+- has_many :orders
 
 ## items テーブル
 
-|column     |Type         |Options          |
-|-----------|-------------|-----------------|
-|title      |string       |null: false      |
-|price      |integer      |null: false      |
-|category   |text         |null: false      |
-|item_status|text         |null: false      |
-|burden     |text         |null: false      |
-|area       |text         |null: false      |
-|days       |text         |null: false      |
-|image      |ActiveStorage|null: false      |
-|user_id    |references   |foreign_key: true|
+|column        |Type         |Options                     |
+|--------------|-------------|----------------------------|
+|title         |string       |null: false                 |
+|price         |integer      |null: false                 |
+|category      |integer      |null: false, ActiveHashで実装|
+|item_status   |integer      |null: false, ActiveHashで実装|
+|burden        |integer      |null: false, ActiveHashで実装|
+|prefectures   |integer      |null: false, ActiveHashで実装|
+|days          |integer      |null: false, ActiveHashで実装|
+|user_id       |references   |foreign_key: true           |
 
 ### Association
 - belongs_to: user
@@ -48,15 +49,15 @@
 
 ## residences テーブル
 
-|column       |Type      |Options          |
-|-------------|----------|-----------------|
-|postal_code  |integer   |null: false      |
-|prefectures  |string    |null: false      |
-|municipality |string    |null: false      |
-|address      |string    |null: false      |
-|building_name|string    |                 |
-|phone_number |integer   |null: false      |
-|order_id     |references|foreign_key: true|
+|column       |Type      |Options                     |
+|-------------|----------|----------------------------|
+|postal_code  |string    |null: false                 |
+|prefectures  |string    |null: false, ActiveHashで実装|
+|municipality |string    |null: false                 |
+|address      |string    |null: false                 |
+|building_name|string    |                            |
+|phone_number |integer   |null: false                 |
+|order_id     |references|foreign_key: true           |
 
 ### Association
 - belongs_to: order
