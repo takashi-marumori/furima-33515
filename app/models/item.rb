@@ -1,7 +1,9 @@
 class Item < ApplicationRecord
   belongs_to :user
-  has_one :genre
   has_one_attached :image
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  validates :category_id, numericality: { other_than: 1 }
 
   with_options presence: true do
     validates :title 
