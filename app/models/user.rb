@@ -17,4 +17,6 @@ class User < ApplicationRecord
       validates :read_last_name
     end
   end
+
+  has_many :items
 end
