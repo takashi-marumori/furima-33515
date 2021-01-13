@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :title 
     validates :explanation
-    validates :price,format: { with:/\A[0-9]+\z/},length: { in:300..9999999 }
+    validates :price,format: { with:/\A[0-9]+\z/},numericality: { on:300..9999999 }
     validates :image
     with_options numericality: { other_than: 1 } do
       validates :category_id
