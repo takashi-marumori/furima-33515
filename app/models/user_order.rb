@@ -10,11 +10,11 @@ class UserOrder
                              numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 11 }
   end
 
-  validates :prefecture, numericality: { other_than: 1 }
+  validates :prefecture_id, numericality: { other_than: 1 }
 
   def save
+    oeder = Order.create(user_id: user.id, item_id: item.id)
     Residence.create(postal_code: postal_code, prefecture_id: prefecture_id, municipality: municipality, address: address,
-                     building_name: building_name, phone_number: phone_number)
-    Order.create(user_id: user.id, item_id: item.id)
+                     building_name: building_name, phone_number: phone_number, order_id: oeder.id)
   end
 end
