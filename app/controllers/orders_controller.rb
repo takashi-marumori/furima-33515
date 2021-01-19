@@ -10,19 +10,21 @@ class OrdersController < ApplicationController
     if @user_order.valid?
       pay_item
       @user_order.save
-      redirect_to action: :index
+      redirect_to root_path
     else
-      render action: :new
+      render action: :index
     end
   end
 
   private
+
   def user_order_params
-    params.require(:order).permit(:postal_code, :prefecture_id, :municipality, :address, :building_name, :phone_number, :price).merge(token: params[:token])
+    params.permit(:postal_code, :prefecture_id, :municipality, :address, :building_name, :phone_number,
+                                  :price).merge(token: params[:token])
   end
 
   def pay_item
-    Payjp.api_key = "###"
+    Payjp.api_key = '###'
     Payjp::Charge.create(
       amount: user_order_params[:price],
       card: user_order_params[:token],
