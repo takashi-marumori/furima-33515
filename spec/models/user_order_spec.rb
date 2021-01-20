@@ -14,7 +14,7 @@ RSpec.describe UserOrder, type: :model do
         expect(@user_order).to be_valid
       end
       it 'phone_numberが11桁以下だと購入できる' do
-        @user_order.phone_number = "11111"
+        @user_order.phone_number = '11111'
         expect(@user_order).to be_valid
       end
 
@@ -67,7 +67,7 @@ RSpec.describe UserOrder, type: :model do
         it 'phone_numberが12桁以上だと購入できない' do
           @user_order.phone_number = '000000000000'
           @user_order.valid?
-          expect(@user_order.errors.full_messages).to include("Phone number is invalid")
+          expect(@user_order.errors.full_messages).to include('Phone number is invalid')
         end
       end
     end
