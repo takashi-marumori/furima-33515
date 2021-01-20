@@ -6,7 +6,7 @@ RSpec.describe UserOrder, type: :model do
   end
   describe '商品の購入' do
     context '購入できる時' do
-      it 'user_id,item_id,postal_code,prefecture_id,municipality,address,building_name,phone_number,tokenがあれば購入できる' do
+      it 'postal_code,prefecture_id,municipality,address,building_name,phone_number,tokenがあれば購入できる' do
         expect(@user_order).to be_valid
       end
       it 'building_nameが空でも購入できる' do
