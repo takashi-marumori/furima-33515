@@ -2,8 +2,12 @@ require 'rails_helper'
 
 RSpec.describe UserOrder, type: :model do
   before do
-    @user_order = FactoryBot.build(:user_order)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    @user_order = FactoryBot.build(:user_order, user_id: @user, item_id: @item)
+    sleep 0.1
   end
+
   describe '商品の購入' do
     context '購入できる時' do
       it 'postal_code,prefecture_id,municipality,address,building_name,phone_number,tokenがあれば購入できる' do
@@ -66,6 +70,11 @@ RSpec.describe UserOrder, type: :model do
         end
         it 'phone_numberが12桁以上だと購入できない' do
           @user_order.phone_number = '000000000000'
+          @user_order.valid?
+          expect(@user_order.errors.full_messages).to include('Phone number is invalid')
+        end
+        it 'phone_numberが英数字混合だと購入できない' do
+          @user_order.phone_number = 'aaaa0000'
           @user_order.valid?
           expect(@user_order.errors.full_messages).to include('Phone number is invalid')
         end
